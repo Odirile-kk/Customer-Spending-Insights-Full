@@ -1,0 +1,14 @@
+/Users/demo/Downloads/customer-spending-insights-api/src/main/java/za/co/example/spending/SpendingApiApplication.java
+/Users/demo/Downloads/customer-spending-insights-api/src/main/java/za/co/example/spending/config/OpenApiConfig.java
+/Users/demo/Downloads/customer-spending-insights-api/src/main/java/za/co/example/spending/config/SecurityConfig.java
+/Users/demo/Downloads/customer-spending-insights-api/src/main/java/za/co/example/spending/config/SeedData.java
+/Users/demo/Downloads/customer-spending-insights-api/src/main/java/za/co/example/spending/controller/ApiExceptionHandler.java
+/Users/demo/Downloads/customer-spending-insights-api/src/main/java/za/co/example/spending/controller/CustomerController.java
+/Users/demo/Downloads/customer-spending-insights-api/src/main/java/za/co/example/spending/model/Customer.java
+/Users/demo/Downloads/customer-spending-insights-api/src/main/java/za/co/example/spending/model/SpendingGoal.java
+/Users/demo/Downloads/customer-spending-insights-api/src/main/java/za/co/example/spending/model/SpendingTransaction.java
+/Users/demo/Downloads/customer-spending-insights-api/src/main/java/za/co/example/spending/repo/CustomerRepository.java
+/Users/demo/Downloads/customer-spending-insights-api/src/main/java/za/co/example/spending/repo/GoalRepository.java
+/Users/demo/Downloads/customer-spending-insights-api/src/main/java/za/co/example/spending/repo/TransactionRepository.java
+/Users/demo/Downloads/customer-spending-insights-api/src/main/java/za/co/example/spending/service/CurrentCustomerService.java
+/Users/demo/Downloads/customer-spending-insights-api/src/main/java/za/co/example/spending/service/SpendingService.java

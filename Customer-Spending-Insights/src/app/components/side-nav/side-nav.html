@@ -1,0 +1,45 @@
+<aside class="sidebar">
+  <a class="brand" href="/" aria-label="Customer Spending Insights home">
+    <span class="brand-mark"><fa-icon [icon]="brandIcon" aria-hidden="true"></fa-icon></span>
+    <span>Spending Insights</span>
+  </a>
+
+  <nav aria-label="Main navigation">
+    <a class="nav-link active" href="/" aria-current="page" title="Dashboard">
+      <fa-icon class="nav-icon" [icon]="dashboardIcon" aria-hidden="true"></fa-icon
+      ><span>Dashboard</span>
+    </a>
+    <a class="nav-link" href="#trends" title="Spending trends">
+      <fa-icon class="nav-icon" [icon]="trendsIcon" aria-hidden="true"></fa-icon><span>Trends</span>
+    </a>
+    <a class="nav-link" href="#transactions" title="Transactions">
+      <fa-icon class="nav-icon" [icon]="transactionsIcon" aria-hidden="true"></fa-icon
+      ><span>Transactions</span>
+    </a>
+    <a class="nav-link" href="#categories" title="Categories">
+      <fa-icon class="nav-icon" [icon]="categoriesIcon" aria-hidden="true"></fa-icon
+      ><span>Categories</span>
+    </a>
+    <a class="nav-link" href="#goals" title="Spending goals">
+      <fa-icon class="nav-icon" [icon]="goalsIcon" aria-hidden="true"></fa-icon
+      ><span>My goals</span>
+    </a>
+  </nav>
+
+  <section class="account-actions" aria-label="Account">
+    @if (auth.isAuthenticated()) {
+      <button class="auth-button" type="button" (click)="logout()" title="Log out">
+        <fa-icon class="nav-icon" [icon]="logoutIcon" aria-hidden="true"></fa-icon
+        ><span>Log out</span>
+      </button>
+    } @else {
+      <button class="auth-button" type="button" (click)="login()" title="Log in">
+        <fa-icon class="nav-icon" [icon]="loginIcon" aria-hidden="true"></fa-icon
+        ><span>Log in</span>
+      </button>
+    }
+    @if (errorMessage()) {
+      <p class="auth-error" role="alert">{{ errorMessage() }}</p>
+    }
+  </section>
+</aside>

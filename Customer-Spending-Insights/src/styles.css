@@ -1,0 +1,162 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  color: #1d2925;
+  background: #f6f8f7;
+}
+
+.profile-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+  margin-bottom: 20px;
+  padding: 20px 24px;
+  border: 1px solid #e8efeb;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 7px 20px rgb(42 65 55 / 5%);
+}
+
+.profile-identity {
+  display: flex;
+  min-width: 190px;
+  align-items: center;
+  gap: 14px;
+}
+
+.profile-avatar {
+  display: grid;
+  flex: 0 0 48px;
+  width: 48px;
+  height: 48px;
+  place-items: center;
+  border-radius: 50%;
+  background: #dff2e8;
+  color: #287255;
+  font-size: 19px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.profile-eyebrow,
+.profile-email,
+.profile-details dt,
+.profile-details dd {
+  margin: 0;
+}
+
+.profile-eyebrow,
+.profile-details dt {
+  color: #829089;
+  font-size: 11px;
+}
+
+.profile-identity h1 {
+  margin: 3px 0;
+  color: #253832;
+  font-size: 17px;
+}
+
+.profile-email {
+  color: #63726b;
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+
+.profile-details {
+  display: grid;
+  flex: 1;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+  margin: 0;
+}
+
+.profile-details > div {
+  min-width: 0;
+}
+
+.profile-details dd {
+  margin-top: 5px;
+  color: #34443d;
+  font-size: 13px;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 1050px) {
+  .profile-details {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  .profile-card {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 18px;
+  }
+}
+
+.metric-icon {
+  position: absolute;
+  top: 15px;
+  right: 17px;
+  color: rgb(26 58 47 / 38%);
+  font-size: 20px;
+}
+
+.search-box fa-icon {
+  color: #87958e;
+  font-size: 14px;
+}
+
+.legend-icon {
+  width: 12px;
+  font-size: 10px;
+  text-align: center;
+}
+
+.merchant-icon fa-icon {
+  font-size: 13px;
+}
+
+.goal-icon fa-icon {
+  font-size: 14px;
+}
+
+.metric-teal {
+  background: linear-gradient(120deg, #8ce1d8, #b8eee6);
+}
+
+.metric-blue {
+  background: linear-gradient(120deg, #a5c9fa, #c5dcff);
+}
+
+.metric-pink {
+  background: linear-gradient(120deg, #f5b4d0, #f8d0df);
+}
+
+.metric-purple {
+  background: linear-gradient(120deg, #cdbcf3, #e0d5fb);
+}
+
+.trend-bar {
+  background: linear-gradient(180deg, #68c9bf, #8edbd0);
+}
+
+.empty-copy {
+  margin: 20px 0;
+  color: #929d96;
+  font-size: 12px;
+  text-align: center;
+}
