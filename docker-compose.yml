@@ -1,0 +1,72 @@
+services:
+  keycloak:
+    container_name: keycloak
+    image: quay.io/keycloak/keycloak:26.8.1
+    command: start-dev --import-realm
+    ports:
+      - "8080:8080"
+    environment:
+      KC_BOOTSTRAP_ADMIN_USERNAME: ${KEYCLOAK_ADMIN:-admin}
+      KC_BOOTSTRAP_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD:-admin}
+    volumes:
+      - keycloak_data:/opt/keycloak/data
+      - ./keycloak:/opt/keycloak/data/import:ro
+    healthcheck:
+      test: ["CMD-SHELL", "bash -c '</dev/tcp/127.0.0.1/8080'"]
+      interval: 10s
+      timeout: 5s
+      retries: 30
+      start_period: 30s
+    restart: unless-stopped
+
+  keycloak-demo-init:
+    container_name: keycloak-demo-init
+    image: quay.io/keycloak/keycloak:26.8.1
+    entrypoint: ["/bin/bash", "/scripts/setup-demo-user.sh"]
+    environment:
+      KEYCLOAK_ADMIN: ${KEYCLOAK_ADMIN:-admin}
+      KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD:-admin}
+      DEMO_USERNAME: ${DEMO_USERNAME:-john.doe}
+      DEMO_EMAIL: ${DEMO_EMAIL:-john.doe@example.com}
+      DEMO_USER_PASSWORD: ${DEMO_USER_PASSWORD}
+      DEMO_FIRST_NAME: ${DEMO_FIRST_NAME:-John}
+      DEMO_LAST_NAME: ${DEMO_LAST_NAME:-Doe}
+      DEMO_CUSTOMER_ID: ${DEMO_CUSTOMER_ID:-12345}
+    volumes:
+      - ./keycloak/setup-demo-user.sh:/scripts/setup-demo-user.sh:ro
+    depends_on:
+      keycloak:
+        condition: service_healthy
+    restart: "no"
+
+  customer-spending-api:
+    build:
+      context: ../customer-spending-project/customer-spending-insights-api
+      dockerfile: Dockerfile
+    container_name: customer-spending-insights-api
+    ports:
+      - "8082:8082"
+    environment:
+      SERVER_PORT: 8082
+      SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI: http://127.0.0.1:8080/realms/customer-insights
+      SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK_SET_URI: http://keycloak:8080/realms/customer-insights/protocol/openid-connect/certs
+    depends_on:
+      keycloak-demo-init:
+        condition: service_completed_successfully
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    restart: unless-stopped
+    
+  customer-spending-insights:
+    build:
+      context: ../customer-spending-project/Customer-Spending-Insights
+      dockerfile: Dockerfile
+    ports:
+      - "${APP_PORT:-4200}:80"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    restart: unless-stopped
+
+volumes:
+  keycloak_data:
+
