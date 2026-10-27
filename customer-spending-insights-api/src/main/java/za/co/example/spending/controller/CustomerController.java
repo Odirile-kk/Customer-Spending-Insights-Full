@@ -65,11 +65,9 @@ public class CustomerController {
         Customer verifiedCustomer;
 
         if ("current".equalsIgnoreCase(customerId)) {
-            // Resolve the logged-in customer using their Keycloak email
             verifiedCustomer =
                     currentCustomerService.getCurrentCustomer(authentication);
         } else {
-            // Keep existing behaviour for explicit customer IDs
             verifiedCustomer = verifyCustomerAccess(customerId, authentication);
         }
 

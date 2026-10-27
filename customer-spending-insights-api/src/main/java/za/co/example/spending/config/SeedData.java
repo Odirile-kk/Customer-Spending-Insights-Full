@@ -51,16 +51,10 @@ public class SeedData {
             GoalRepository goals) {
 
         return args -> {
-            /*
-             * DEVELOPMENT PROTOTYPE ONLY:
-             * Clear existing seed data so only John Doe remains.
-             * This deletes existing transaction and goal records too.
-             */
             transactions.deleteAll();
             goals.deleteAll();
             customers.deleteAll();
 
-            // 1. Create John Doe's customer profile.
             Customer john = new Customer(
                     CUSTOMER_ID,
                     ACCOUNT_ID,
@@ -74,7 +68,6 @@ public class SeedData {
 
             customers.save(john);
 
-            // 2. Create John's sample transactions.
             List<SpendingTransaction> johnTransactions =
                     new ArrayList<>();
 
@@ -102,7 +95,6 @@ public class SeedData {
 
             transactions.saveAll(johnTransactions);
 
-            // 3. Create John's spending goals.
             List<SpendingGoal> johnGoals = List.of(
                     new SpendingGoal(
                             "goal_001",

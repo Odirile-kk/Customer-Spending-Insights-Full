@@ -16,9 +16,6 @@ CLIENT_ID=customer-insights-rest-api
 : "${DEMO_LAST_NAME:?Missing last name}"
 : "${DEMO_CUSTOMER_ID:=12345}"
 
-# Return an ID for an exact field/value match using Python's JSON parser.
-# Python is not guaranteed to be installed in the Keycloak image, so use
-# Keycloak's CLI JSON output and a small, structure-aware Bash helper instead.
 find_id_by_name() {
   local collection="$1"
   local field="$2"

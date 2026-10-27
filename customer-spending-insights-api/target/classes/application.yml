@@ -7,3 +7,4 @@ spring:
       resourceserver:
         jwt:
           issuer-uri: http://127.0.0.1:8080/realms/customer-insights
+          jwk-set-uri: http://keycloak:8080/realms/customer-insights/protocol/openid-connect/certs

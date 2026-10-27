@@ -16,7 +16,6 @@ WORKDIR /app
 
 COPY --from=build /app/target/*.jar app.jar
 
-# Spring Boot backend port that the frontend is expecting
 EXPOSE 8082
 
 ENTRYPOINT ["java", "-jar", "app.jar"]

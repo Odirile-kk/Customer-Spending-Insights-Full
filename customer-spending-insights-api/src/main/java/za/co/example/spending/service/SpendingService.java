@@ -1,4 +1,3 @@
-
 package za.co.example.spending.service;
 
 import org.springframework.stereotype.Service;
@@ -111,10 +110,6 @@ public class SpendingService {
         return new BigDecimal(value);
     }
 
-    // ---------------------------------------------------------
-    // CATEGORY RESPONSE HELPER
-    // ---------------------------------------------------------
-
     public Map<String, Object> categoryMap(
             String name,
             BigDecimal amount,
@@ -164,15 +159,10 @@ public class SpendingService {
         return result;
     }
 
-    // ---------------------------------------------------------
-    // SPENDING SUMMARY
-    // ---------------------------------------------------------
-
     public Map<String, Object> summary(String id, String period) {
         List<SpendingTransaction> allTransactions = all(id);
         String selectedPeriod = period == null ? "30d" : period;
 
-        // Return the supplied prototype figures for John's default summary.
         if (isJohn(id) && "30d".equals(selectedPeriod)) {
             Map<String, Object> compared = new LinkedHashMap<>();
             compared.put("spentChange", 12.5);
@@ -189,7 +179,6 @@ public class SpendingService {
             return result;
         }
 
-        // Database-driven calculation for other periods/customers.
         LocalDate[] dates = range(selectedPeriod, allTransactions);
 
         List<SpendingTransaction> current = filter(
@@ -257,10 +246,6 @@ public class SpendingService {
         return result;
     }
 
-    // ---------------------------------------------------------
-    // SPENDING BY CATEGORY
-    // ---------------------------------------------------------
-
     public Map<String, Object> categories(
             String id,
             String period,
@@ -270,7 +255,6 @@ public class SpendingService {
         List<SpendingTransaction> allTransactions = all(id);
         String selectedPeriod = period == null ? "30d" : period;
 
-        // Exact prototype response when no custom dates are supplied.
         if (isJohn(id)
                 && start == null
                 && end == null
@@ -309,7 +293,6 @@ public class SpendingService {
             return result;
         }
 
-        // Database-driven calculation for custom ranges/other periods.
         LocalDate[] dates;
 
         if (start == null && end == null) {
@@ -390,17 +373,14 @@ public class SpendingService {
 
 
     public Map<String, Object> trends(String id, int months) {
-        // Validate the requested number of months.
         if (months < 1 || months > 24) {
             throw new IllegalArgumentException(
                     "months must be between 1 and 24"
             );
         }
 
-        // Ensure the customer exists.
         customer(id);
 
-        // Exact prototype trends for John Doe.
         if ("12345".equals(id)) {
             List<Map<String, Object>> prototype = List.of(
                     trend("2024-01", "3890.25", 42, 92.62),
@@ -419,7 +399,6 @@ public class SpendingService {
             return Map.of("trends", selected);
         }
 
-        // Database-based trends for other customers.
         List<SpendingTransaction> allTransactions = all(id);
         YearMonth last = YearMonth.from(latestDate(allTransactions));
         List<Map<String, Object>> rows = new ArrayList<>();
@@ -558,16 +537,9 @@ public class SpendingService {
         );
     }
 
-    // ---------------------------------------------------------
-    // SPENDING GOALS
-    // ---------------------------------------------------------
-
-
     public Map<String, Object> goals(String id) {
-        // Ensure the customer exists.
         customer(id);
 
-        // Exact prototype values for John Doe.
         if ("12345".equals(id)) {
             List<Map<String, Object>> rows = new ArrayList<>();
 
@@ -594,7 +566,6 @@ public class SpendingService {
             return Map.of("goals", rows);
         }
 
-        // Database-based calculation for other customers.
         List<SpendingTransaction> allTransactions = all(id);
         LocalDate today = latestDate(allTransactions);
         YearMonth yearMonth = YearMonth.from(today);
@@ -652,10 +623,6 @@ public class SpendingService {
 
         return Map.of("goals", rows);
     }
-
-    // ---------------------------------------------------------
-    // FILTER OPTIONS
-    // ---------------------------------------------------------
 
     public Map<String, Object> filters(String id) {
         customer(id);

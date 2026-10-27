@@ -1,4 +1,3 @@
-
 #!/usr/bin/env bash
 set -Eeuo pipefail
 
@@ -16,9 +15,6 @@ CLIENT_ID=customer-insights-rest-api
 : "${DEMO_LAST_NAME:?Missing last name}"
 : "${DEMO_CUSTOMER_ID:=12345}"
 
-# Return an ID for an exact field/value match using Python's JSON parser.
-# Python is not guaranteed to be installed in the Keycloak image, so use
-# Keycloak's CLI JSON output and a small, structure-aware Bash helper instead.
 find_id_by_name() {
   local collection="$1"
   local field="$2"
@@ -167,12 +163,10 @@ echo "Checking profile and email scopes..."
 PROFILE_SCOPE_ID="$(ensure_scope profile)"
 EMAIL_SCOPE_ID="$(ensure_scope email)"
 
-# Add standard OIDC profile claims.
 ensure_standard_mapper "$PROFILE_SCOPE_ID" given-name givenName given_name
 ensure_standard_mapper "$PROFILE_SCOPE_ID" family-name lastName family_name
 ensure_standard_mapper "$PROFILE_SCOPE_ID" full-name username name
 
-# Add the email claim.
 ensure_standard_mapper "$EMAIL_SCOPE_ID" email email email
 
 echo "Attaching default client scopes..."
