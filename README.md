@@ -22,6 +22,9 @@
 ## Access the API
 
 - **Frontend:** http://localhost:4200
+- **Login Details:**
+- Useranme = john.doe
+- Password = JohnPassword123!
 - **Backend API:** http://localhost:8082
 - **Keycloak:** http://127.0.0.1:8080
 
